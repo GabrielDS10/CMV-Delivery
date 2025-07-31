@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+// Asuming these components are in the same directory as the original code
 import Header from './components/Header.jsx';
 import ShoppingForm from './components/ShoppingForm.jsx';
-import Dishes from './components/DishesForm.jsx';
+import Dishes from './components/ShoppingForm.jsx';
 import Footer from './components/Footer.jsx';
 import IfoodMenu from './components/IfoodMenu.jsx';
 import ProfitReport from './components/ProfitReport.jsx';
@@ -30,6 +31,8 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [activeTab, setActiveTab] = useState('compras'); // 'compras', 'pratos', 'ifood' ou 'relatorio'
+  // NEW STATE: State to control the development modal
+  const [showDevelopmentModal, setShowDevelopmentModal] = useState(true);
 
   // Estados para Compras
   const [itemName, setItemName] = useState('');
@@ -211,7 +214,7 @@ function App() {
     }
   }, [db, userId, itemName, itemCategory, itemQuantity, itemUnit, itemPrice, appId]);
 
-  // Funções para Edição de Compras 
+  // Funções para Edição de Compras
   const handleEditClick = useCallback((purchase) => {
     setEditingPurchase(purchase);
     setEditName(purchase.name);
@@ -461,6 +464,25 @@ function App() {
     </div>
   );
 
+  // NEW MODAL: Component for the development message
+  const DevelopmentModal = ({ onClose }) => (
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+      <div className="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+        <h3 className="text-3xl font-bold text-gray-900 mb-4">Atenção!</h3>
+        <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+          Este site está atualmente em desenvolvimento e pode conter funcionalidades incompletas ou erros.
+          Agradecemos a sua compreensão enquanto trabalhamos para melhorá-lo.
+        </p>
+        <button
+          onClick={onClose}
+          className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Entendido
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 p-4 font-sans flex flex-col items-center">
       {/* Modais de Mensagem e Confirmação */}
@@ -475,6 +497,8 @@ function App() {
           }}
         />
       )}
+      {/* NEW MODAL: Development warning modal */}
+      {showDevelopmentModal && <DevelopmentModal onClose={() => setShowDevelopmentModal(false)} />}
 
       {/* Header com as props */}
       <Header
