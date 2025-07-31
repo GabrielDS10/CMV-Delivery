@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import Header from './components/header.jsx';
+import Header from './components/Header.jsx';
 import ShoppingForm from './components/ShoppingForm.jsx';
 import Dishes from './components/DishesForm.jsx';
 import Footer from './components/Footer.jsx';
