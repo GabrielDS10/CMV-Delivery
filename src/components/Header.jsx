@@ -9,7 +9,7 @@ function Header({ userId, activeTab, setActiveTab }) {
                 <p className="text-lg text-gray-600">Gerencie suas compras e custos de pratos de forma eficiente.</p>
                 {userId && (
                     <p className="text-sm text-gray-500 mt-2">
-                        ID do Usuário: <span className="font-mono bg-gray-100 px-2 py-1 rounded-md text-gray-700">{userId}</span>
+                        {/* ID do Usuário: <span className="font-mono bg-gray-100 px-2 py-1 rounded-md text-gray-700">{userId}</span> */}
                     </p>
                 )}
             </header>
