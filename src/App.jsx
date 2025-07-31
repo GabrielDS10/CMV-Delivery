@@ -5,7 +5,8 @@ import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, d
 // Asuming these components are in the same directory as the original code
 import Header from './components/Header.jsx';
 import ShoppingForm from './components/ShoppingForm.jsx';
-import Dishes from './components/ShoppingForm.jsx';
+// CORREÇÃO: A linha abaixo foi alterada para importar o componente Dishes do arquivo correto
+import Dishes from './components/DishesForm.jsx';
 import Footer from './components/Footer.jsx';
 import IfoodMenu from './components/IfoodMenu.jsx';
 import ProfitReport from './components/ProfitReport.jsx';
